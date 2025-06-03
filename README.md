@@ -35,7 +35,4 @@ Here is a preview of our cleaned dataset:
 
 ```python
 df_cleaned.head()
-
----
-
-### 2. **Univariate Plot + Description**
+```
