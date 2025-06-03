@@ -36,8 +36,14 @@ Here is a preview of our cleaned dataset:
 
 ### 2. **Univariate Plot + Description**
 
-Embed a **Plotly chart showing one column’s distribution**, e.g. cause category:
+Embed **Plotly charts showing one column’s distribution**, e.g. `CAUSE.CATEGORY`,`CLIMATE.CATEGORY` :
 
 <iframe src="assets/Histogram_of_Cause_of_Power_Outage.html" width="800" height="500" frameborder="0"></iframe>
 
 This plot shows that most power outages are caused by **severe weather**, followed by **intentional attacks**. Less frequent causes include equipment failure, system disruption, and islanding. This skew suggests that natural factors are the dominant driver of major outages.
+
+<iframe src="assets/Histogram_of_Cause_of_Power_Outage.html" width="800" height="500" frameborder="0"></iframe>
+
+This chart shows how power outages are distributed across different **climate regions**. Most outages occur in areas categorized as **“normal”**, followed by **cold** and **warm** zones. This may reflect both population distribution and climate-linked vulnerabilities.
+
+### 3. **Bivariate Plot + Description**
