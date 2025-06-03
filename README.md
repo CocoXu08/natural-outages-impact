@@ -47,3 +47,9 @@ This plot shows that most power outages are caused by **severe weather**, follow
 This chart shows how power outages are distributed across different **climate regions**. Most outages occur in areas categorized as **“normal”**, followed by **cold** and **warm** zones. This may reflect both population distribution and climate-linked vulnerabilities.
 
 ### 3. **Bivariate Plot + Description**
+
+Embed **Plotly charts  that displays the relationship between two columns**. e.g. `Outage Duration` vs. `Customers Affected`：
+
+<iframe src="assets/Scatter_OUTAGE_DURATION_vs_CUSTOMERS_AFFECTED.html" width="800" height="600" frameborder="0"></iframe>
+
+This scatter plot shows the relationship between **outage duration** and the **number of customers affected**. While there's no strong linear trend, we observe that even **short-duration outages can impact large populations**, indicating that population density and infrastructure vulnerability both play roles in outage severity.
