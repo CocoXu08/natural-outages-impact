@@ -80,11 +80,30 @@ To potentially reclassify this missingness as Missing At Random (MAR), there are
 We investigated whether the missingness of the `DEMAND.LOSS.MW` column depends on other columns using permutation testing. Specifically, we tested on:
 	•	Whether the missingness varies by `YEAR` (i.e., does the chance that DEMAND.LOSS.MW is missing differ between years?)
 	•	Whether it depends on `TOTAL.PRICE`
-#### Test 1: Is Missingness of `DEMAND.LOSS.MW` Dependent on YEAR?
+#### Test 1: Is Missingness of `DEMAND.LOSS.MW` Dependent on `YEAR`?
 We assess the MAR by creating a binary indicator `DEMAND_LOSS_IS_MISSING` and computed the variance in missingness rate across years as statistics. Then, we shuffled the missingness labels and repeated this 1,000 times to build a null distribution of variance under the assumption of no relationship.
-	•	Observed test statistic (variance): Very high
-	•	p-value: 0.0
-Distribution of year by missingness of `DEMAND.LOSS.MW`:
-<iframe src="assets/year_distribution_missingness.html" width="800" height="600" frameborder="0"></iframe>
 
+Distribution of `YEAR` by missingness of `DEMAND.LOSS.MW`:
+
+<iframe src="assets/year_distribution_missingness.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_YEAR.html" width="800" height="600" frameborder="0"></iframe>
+
+After running a permutation test with 1,000 simulations:
+* The observed variance in missingness across years was significantly larger than any variance seen in the permuted (randomized) datasets.
+* The p-value was 0.0, indicating that such a variance is extremely unlikely to occur by chance.
+
+This result provides strong evidence that the missingness of `DEMAND.LOSS.MW` depends on `YEAR` and implies the missingness is not Missing Completely At Random (MCAR).
+
+#### Test 2: Is Missingness of `DEMAND.LOSS.MW` Dependent on `TOTAL.PRICE`?
+
+We ran a similar permutation test using average `TOTAL.PRICE`(i.e., the price of electricity)：
+
+Distribution of `TOTAL.PRICE` by missingness of `DEMAND.LOSS.MW`:
+<iframe src="assets/total_price_distribution_missingness.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_TOTAL.PRICE.html" width="800" height="600" frameborder="0"></iframe>
+
+After running a similar permutation test:
+* The p-value was 0.108, meaning there is no statistically significant difference in missingness across different price levels under our chosen significant level(0.05).
+
+There is not enough evidence to conclude that the missingness of `DEMAND.LOSS.MW` depends on `TOTAL.PRICE`. This suggests that electricity pricing likely does not influence whether demand loss is reported, and thus `TOTAL.PRICE` may be independent of this missingness.
 
