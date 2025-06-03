@@ -1,6 +1,6 @@
 # natural-outages-impact
 A data science project for DSC 80 at UC San Diego exploring how the cause of power outages—natural events vs. other factors—impacts the number of customers affected. Includes data cleaning, visualizations, hypothesis testing, and predictive modeling.
-## Project Overview
+## Introduction
 
 > **What characteristics are associated with more severe power outages in the United States?**
 
@@ -9,8 +9,6 @@ This project explores the factors that influence the severity of major power out
 Power outages have wide-reaching impacts on society — disrupting transportation, healthcare, communication, and safety. Understanding the underlying patterns in when and where outages happen, and how bad they get, can help utilities and governments mitigate future risks.
 
 ---
-
-## About the Dataset
 
 Our dataset contains approximately **1,500 outage events** from across the United States, covering multiple years and geographic regions.
 
@@ -26,3 +24,18 @@ Each row in the dataset represents one **major outage event**. Relevant columns 
 - **YEAR**/**MONTH**: Location and timing of the outage
 - **TOTAL.CUSTOMERS**: The total number of electricity customers in the affected area (provides local demand context)
 - **CLIMATE.REGION**: Broad climate category (e.g. “West”, “South”, “Pacific”) to group outages by environmental conditions
+
+## Data Cleaning and Exploratory Data Analysis
+### 1. **Data Cleaning**
+We began by identifying and standardizing column types (e.g. converting `OUTAGE.DURATION` to numeric). We dropped unit suffixes`OBS`, parsed dates, and created boolean indicators for missingness.
+
+We also filtered out rows with null or uninformative values in key columns such as `CAUSE.CATEGORY`, `CUSTOMERS.AFFECTED`, and `OUTAGE.DURATION`.
+
+Here is a preview of our cleaned dataset:
+
+```python
+df_cleaned.head()
+
+---
+
+### 2. **Univariate Plot + Description**
