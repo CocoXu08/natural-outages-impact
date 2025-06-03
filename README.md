@@ -53,3 +53,11 @@ Embed **Plotly charts  that displays the relationship between two columns**. e.g
 <iframe src="assets/Scatter_OUTAGE_DURATION_vs_CUSTOMERS_AFFECTED.html" width="800" height="600" frameborder="0"></iframe>
 
 This scatter plot shows the relationship between **outage duration** and the **number of customers affected**. While there's no strong linear trend, we observe that even **short-duration outages can impact large populations**, indicating that population density and infrastructure vulnerability both play roles in outage severity.
+
+### 4. **Interesting Aggregates**
+A **grouped table** of Average Customers Affected by Outage Cause:
+<iframe src="assets/agg_final_by_cause.html" width="100%" height="400" frameborder="0"></iframe>
+
+This grouped table summarizes the **average number of customers affected** by different combinations of outage causes and subcategories. It also shows how often each type of event occurs and includes a column indicating whether the cause was related to **severe weather**.
+
+While some equipment-related issues impact large numbers of customers, severe weather remains the most consistently high-impact cause overall, both in terms of frequency and average disruption. We also observe that certain technical causes (like **substation** or **HVSubstation interruption**) can have as large or even larger impacts than severe weather events, despite occurring less frequently. This suggests the importance of infrastructure resilience alongside climate response.
