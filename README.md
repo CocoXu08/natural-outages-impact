@@ -33,3 +33,11 @@ We also filtered out rows with null or uninformative values in key columns such 
 
 Here is a preview of our cleaned dataset:
 <iframe src="assets/df_preview.html" width="100%" height="250"></iframe>
+
+### 2. **Univariate Plot + Description**
+
+Embed a **Plotly chart showing one column’s distribution**, e.g. cause category:
+
+<iframe src="assets/Histogram_of_Cause_of_Power_Outage.html" width="800" height="500" frameborder="0"></iframe>
+
+This plot shows that most power outages are caused by **severe weather**, followed by **intentional attacks**. Less frequent causes include equipment failure, system disruption, and islanding. This skew suggests that natural factors are the dominant driver of major outages.
