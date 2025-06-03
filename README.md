@@ -36,7 +36,7 @@ Here is a preview of our cleaned dataset:
 
 ### 2. **Univariate Plot + Description**
 
-Embed **Plotly charts showing one column’s distribution**, e.g. `CAUSE.CATEGORY`,`CLIMATE.CATEGORY` :
+Embed **Plotly charts showing one column’s distribution**, e.g. `CAUSE.CATEGORY`,`CLIMATE.CATEGORY`：
 
 <iframe src="assets/Histogram_of_Cause_of_Power_Outage.html" width="800" height="500" frameborder="0"></iframe>
 
