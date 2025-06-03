@@ -32,7 +32,4 @@ We began by identifying and standardizing column types (e.g. converting `OUTAGE.
 We also filtered out rows with null or uninformative values in key columns such as `CAUSE.CATEGORY`, `CUSTOMERS.AFFECTED`, and `OUTAGE.DURATION`.
 
 Here is a preview of our cleaned dataset:
-
-```python
-df_cleaned.head()
-```
+<iframe src="assets/df_preview.html" width="100%" height="250"></iframe>
