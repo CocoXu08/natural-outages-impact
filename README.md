@@ -114,11 +114,11 @@ There is not enough evidence to conclude that the missingness of `DEMAND.LOSS.MW
 
 We conducted a hypothesis test to determine whether **severe weather events** result in a significantly higher number of customers affected compared to **non-severe events**. We chose to compare severe vs. non-severe weather events because weather-related causes are one of the most frequent and impactful types of outages in the dataset.
 
-* Null hypothesis: The average number of customers affected by power outages is the same for outages caused by natural events(e.g., heavy winds, storms, earthquakes) and those caused by other factors such as equipment failure, fuel supply emergencies, or vandalism.
+* **Null hypothesis**: The average number of customers affected by power outages is the same for outages caused by natural events(e.g., heavy winds, storms, earthquakes) and those caused by other factors such as equipment failure, fuel supply emergencies, or vandalism.
 
-* Alternative hypothesis: The average number of customers affected is higher for outages caused by natural events (e.g., heavy winds, storms, earthquakes) than for those caused by other reasons.
+* **Alternative hypothesis**: The average number of customers affected is higher for outages caused by natural events (e.g., heavy winds, storms, earthquakes) than for those caused by other reasons.
 
-* Method: A permutation test with 5000 repetitions was used. Labels indicating severe vs. non-severe events were randomly shuffled to generate a null distribution of mean differences.
+* **Method**: A permutation test with 5000 repetitions was used. Labels indicating severe vs. non-severe events were randomly shuffled to generate a null distribution of mean differences.
 * Test Statistic: The difference in mean number of customers affected.
 
 <iframe src="assets/null_dist_severe_weather.html" width="800" height="500" frameborder="0"></iframe>
@@ -126,21 +126,21 @@ We conducted a hypothesis test to determine whether **severe weather events** re
 * p-value = 0.0
 
 
-* Result: The p-value for our permutation testing is 0.0. Thus, we reject the null hypothesis at the significance level 0.05. This provides strong statistical evidence that natural events tend to result in more widespread outages since the average number of customers affected is higher by natural events than by other risk factors. However, this result is based on statistical inference, not a controlled experiment, so we cannot claim causation.
+* **Result**: The p-value for our permutation testing is 0.0. Thus, we reject the null hypothesis at the significance level 0.05. This provides strong statistical evidence that natural events tend to result in more widespread outages since the average number of customers affected is higher by natural events than by other risk factors. However, this result is based on statistical inference, not a controlled experiment, so we cannot claim causation.
 
 ## Framing a Prediction Problem
 
-We aim to predict the severity of a power outage, as measured by the percentage of customers affected (PCT_CUSTOMERS_AFFECTED), using features that would be known at the start of the outage.
+We aim to predict the severity of a power outage, as measured by the percentage of customers affected (`PCT_CUSTOMERS_AFFECTED`), using features that would be known at the start of the outage.
 
-Problem Type: Regression.
+**Problem Type**: Regression.
 
-Response Variable(target):
+**Response Variable(target)**:
 `PCT_CUSTOMERS_AFFECTED` — the percentage of customers in the region who were affected by the outage. This variable is bounded between 0 and 1, and captures the relative impact rather than raw counts (which vary by region size).
 * We selected this variable because it normalizes for population size and utility customer count, making it easier to compare outage severity across regions of different scales. 
 
-predictor Variables(feature):
-* SEVERE.WEATHER == True: Binary indicator for whether the outage was caused by a severe weather event.
-* POPULATION: Total population in the affected area.
-* MONTH: Numeric month of the year — useful for capturing seasonal patterns in outages.
+**predictor Variables(feature)**:
+* `SEVERE.WEATHER` == True: Binary indicator for whether the outage was caused by a severe weather event.
+* `POPULATION`: Total population in the affected area.
+* `MONTH`: Numeric month of the year — useful for capturing seasonal patterns in outages.
 
-To evaluate our regression model, we use Root Mean Squared Error (RMSE) as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
+To evaluate our regression model, we use **Root Mean Squared Error (RMSE)** as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
