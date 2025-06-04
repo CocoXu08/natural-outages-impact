@@ -132,15 +132,15 @@ We conducted a hypothesis test to determine whether **severe weather events** re
 
 We aim to predict the severity of a power outage, as measured by the percentage of customers affected (PCT_CUSTOMERS_AFFECTED), using features that would be known at the start of the outage.
 
-- Problem Type: Regression.
+Problem Type: Regression.
 
-- Response Variable(target):
+Response Variable(target):
 `PCT_CUSTOMERS_AFFECTED` — the percentage of customers in the region who were affected by the outage. This variable is bounded between 0 and 1, and captures the relative impact rather than raw counts (which vary by region size).
 * We selected this variable because it normalizes for population size and utility customer count, making it easier to compare outage severity across regions of different scales. 
 
-- predictor Variables(feature):
+predictor Variables(feature):
 * SEVERE.WEATHER == True: Binary indicator for whether the outage was caused by a severe weather event.
 * POPULATION: Total population in the affected area.
 * MONTH: Numeric month of the year — useful for capturing seasonal patterns in outages.
 
-- To evaluate our regression model, we use Root Mean Squared Error (RMSE) as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
+To evaluate our regression model, we use Root Mean Squared Error (RMSE) as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
