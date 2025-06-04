@@ -17,6 +17,7 @@ Each row in the dataset represents one **major outage event**. Relevant columns 
 - **CAUSE.CATEGORY**/**CAUSE.CATEGORY.DETAIL**: Type of outage (e.g., "severe weather", "intentional attack")
 - **OUTAGE.DURATION**: How long the outage lasted (in hours)
 - **CUSTOMERS.AFFECTED**: How many customers were impacted
+- **PCT_CUSTOMERS_AFFECTED**: Percent of customers affected in the region(We will used it as the measure of outage severity)
 - **DEMAND.LOSS.MW**: Amount of electricity demand lost (in megawatts)
 - **TOTAL.PRICE**: Electricity price during the outage (proxy for economic impact)
 - **POPULATION**: Population of the affected area
@@ -24,12 +25,14 @@ Each row in the dataset represents one **major outage event**. Relevant columns 
 - **YEAR**/**MONTH**: Location and timing of the outage
 - **TOTAL.CUSTOMERS**: The total number of electricity customers in the affected area (provides local demand context)
 - **CLIMATE.REGION**: Broad climate category (e.g. “West”, “South”, “Pacific”) to group outages by environmental conditions
+- **PCT_WATER_INLAND**: Percent of area covered by inland water (proxy for geography)
+- **ANOMALY.LEVEL**: Measure of unusual environmental conditions
 
 ## Data Cleaning and Exploratory Data Analysis
 ### 1. **Data Cleaning**
 We began by identifying and standardizing column types (e.g. converting `OUTAGE.DURATION` to numeric). We dropped unit suffixes`OBS`, parsed dates, and created boolean indicators for missingness.
 
-We also filtered out rows with null or uninformative values in key columns such as `CAUSE.CATEGORY`, `CUSTOMERS.AFFECTED`, and `OUTAGE.DURATION`.
+We also filtered out rows with null or uninformative values in key columns such as `CAUSE.CATEGORY`, `PCT_CUSTOMERS_AFFECTED`, and `OUTAGE.DURATION`.
 
 Here is a preview of our cleaned dataset:
 <iframe src="assets/df_preview.html" width="100%" height="250"></iframe>
@@ -90,7 +93,7 @@ Distribution of `YEAR` by missingness of `DEMAND.LOSS.MW`:
 
 After running a permutation test with 1,000 simulations:
 * The observed variance in missingness across years was significantly larger than any variance seen in the permuted (randomized) datasets.
-* The p-value was 0.0, indicating that such a variance is extremely unlikely to occur by chance.
+* The p-value was 0.002, indicating that such a variance is extremely unlikely to occur by chance.
 
 This result provides strong evidence that the missingness of `DEMAND.LOSS.MW` depends on `YEAR` and implies the missingness is not Missing Completely At Random (MCAR).
 
@@ -107,3 +110,20 @@ After running a similar permutation test:
 
 There is not enough evidence to conclude that the missingness of `DEMAND.LOSS.MW` depends on `TOTAL.PRICE`. This suggests that electricity pricing likely does not influence whether demand loss is reported, and thus `TOTAL.PRICE` may be independent of this missingness.
 
+## Hypothesis Testing
+
+We conducted a hypothesis test to determine whether **severe weather events** result in a significantly higher number of customers affected compared to **non-severe events**. We chose to compare severe vs. non-severe weather events because weather-related causes are one of the most frequent and impactful types of outages in the dataset.
+
+* Null hypothesis: The average number of customers affected by power outages is the same for outages caused by natural events(e.g., heavy winds, storms, earthquakes) and those caused by other factors such as equipment failure, fuel supply emergencies, or vandalism.
+
+* Alternative hypothesis: The average number of customers affected is higher for outages caused by natural events (e.g., heavy winds, storms, earthquakes) than for those caused by other reasons.
+
+* Method: A permutation test with 5000 repetitions was used. Labels indicating severe vs. non-severe events were randomly shuffled to generate a null distribution of mean differences.
+* Test Statistic: The difference in mean number of customers affected.
+
+<iframe src="assets/null_dist_severe_weather.html" width="800" height="500" frameborder="0"></iframe>
+* Observed Statistic: 108,544.95 customers
+* p-value = 0.0
+
+
+* Result: The p-value for our permutation testing is 0.0. Thus, we reject the null hypothesis at the significance level 0.05. This provides strong statistical evidence that natural events tend to result in more widespread outages since the average number of customers affected is higher by natural events than by other risk factors. However, this result is based on statistical inference, not a controlled experiment, so we cannot claim causation.
