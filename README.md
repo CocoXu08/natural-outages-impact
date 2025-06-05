@@ -154,10 +154,11 @@ I built a linear regression model as a baseline to predict the **percentage of c
 **Features Used**
 | Feature Name              | Type         | Description                                                               |
 |---------------------------|--------------|----------------------------------------------------------------------------|
-| `SEVERE.WEATHER == True`  | Nominal      | Binary indicator of whether the outage was caused by severe weather       |
-| `LOG_POPULATION`          | Quantitative | Log-transformed total population                                          |
-| `CUSTOMER_DENSITY`        | Quantitative | Ratio of total customers to population                                    |
-| `SEASON`                  | Nominal      | Season derived from `MONTH` (Winter, Spring, Summer, Fall)                |
+| SEVERE.WEATHER == True    | Nominal      | Binary indicator of whether the outage was caused by severe weather       |
+| LOG_POPULATION            | Quantitative | Log-transformed total population                                          |
+| CUSTOMER_DENSITY          | Quantitative | Ratio of total customers to population                                    |
+| SEASON                    | Nominal      | Season derived from MONTH (Winter, Spring, Summer, Fall)                  |
+
 
 
 - Quantitaive(2): `LOG_POPULATION`, `CUSTOMER_DENSITY`
