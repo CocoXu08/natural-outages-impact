@@ -248,6 +248,47 @@ The performance gains come not just from using a more complex model (Random Fore
 
 
 
+## Fairness Analysis
+**Group Definition**
+To evaluate fairness, we compared model performance between:
+
+- Group X (`anomaly_group` = 0): Outages with `ANOMALY.LEVEL` < 0
+
+- Group Y (`anomaly_group` = 1): Outages with `ANOMALY.LEVEL` ≥ 0
+
+This split reflects outages that are less anomalous versus more anomalous in nature — representing "normal" vs. "extreme" events.
+
+**Evaluation Metric**
+Metric: **Root Mean Squared Error (RMSE)** on the original scale
+
+RMSE captures the magnitude of prediction error in a way that is interpretable and sensitive to large mistakes — making it appropriate for comparing performance across groups with potentially different variance.
+
+**Hypotheses**
+- Null Hypothesis (H₀):
+The model is fair. The absolute RMSE difference between the two anomaly groups is due to chance.
+
+- Alternative Hypothesis (H₁):
+The model is unfair. The observed absolute RMSE difference is statistically significant and unlikely to have occurred by chance.
+
+
+**Test Statistic and Significance Level**
+- Test statistic: absolute RMSE difference between Group X and Group Y, that is `anomaly_group` = 0 and `anomaly_group` = 1
+
+- Significant Level: 0.05
+
+We performed a permutation test with N = 1000 shuffles of the group labels and recalculated the absolute RMSE difference each time to simulate the null distributio
+
+**Results**
+
+Observed absolute RMSE difference: 0.0017
+Permutation test p-value: 0.0770
+(Note: The permutation test involves randomness, so the p-value may vary slightly on each run.)
+
+At a typical significance level of α = 0.05, we failed to reject the null hypothesis. While the model performs slightly differently between more and less anomalous outages, the difference in RMSE is not statistically significant. This suggests that the model is reasonably fair with respect to anomaly severity.
+
+<iframe src="assets/permutation_test_RMSE.html" width="800" height="500" frameborder="0"></iframe>
+
+
 
 
 
