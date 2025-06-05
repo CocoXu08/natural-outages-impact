@@ -152,6 +152,7 @@ I built a linear regression model as a baseline to predict the **percentage of c
 
 
 **Features Used**
+
 | Feature Name              | Type         | Description                                                               |
 |---------------------------|--------------|----------------------------------------------------------------------------|
 | SEVERE.WEATHER == True    | Nominal      | Binary indicator of whether the outage was caused by severe weather       |
