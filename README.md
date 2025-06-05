@@ -148,7 +148,7 @@ To evaluate our regression model, we use **Root Mean Squared Error (RMSE)** as o
 
 
 ## Baseline Model
-I built a linear regression model as a baseline to predict the **percentage of customers affected** (`PCT_CUSTOMERS_AFFECTED`) during a power outage. The goal of this step is to establish a simple, interpretable benchmark that can later be improved upon using more complex features and models.
+We built a linear regression model as a baseline to predict the **percentage of customers affected** (`PCT_CUSTOMERS_AFFECTED`) during a power outage. The goal of this step is to establish a simple, interpretable benchmark that can later be improved upon using more complex features and models.
 
 
 **Features Used**
@@ -169,6 +169,7 @@ I built a linear regression model as a baseline to predict the **percentage of c
 
 
 **Target Variable**
+
 `PCT_CUSTOMERS_AFFECTED`: percentage of total customers impacted by the outage event
 
 **Preprocessing**
@@ -187,7 +188,69 @@ I built a linear regression model as a baseline to predict the **percentage of c
 - Model: LinearRegression from sklearn, inside a pipeline with preprocessing.
 - Train-Test Split: 80% training, 20% testing, using random_state=42.
 
-Overall, the baseline linear regression model performed well, achieving a **Train RMSE**: 0.017372044617043524 and a **Test RMSE**: 0.01698498642585826. The close values indivate that the model and the small feature set, this low RMSE suggests that the selected features are meaningful predictors of outage impact. This provides a strong foundation for future model improvements through more advanced techniques or feature engineering in next step.
+Overall, the baseline linear regression model performed well, achieving 
+- **Train RMSE**: 0.017372044617043524 
+- **Test RMSE**: 0.01698498642585826
+
+The close values indivate that the model and the small feature set, this low RMSE suggests that the selected features are meaningful predictors of outage impact. This provides a strong foundation for future model improvements through more advanced techniques or feature engineering in next step.
+
+
+## Final Model
+To improve the baseline model performance, we introduced several new features that are more reflective of outage impact:
+- `DEMAND.LOSS.MW`: Represents the scale of infrastructure affected. Outages with higher demand loss typically affect more customers, making this a direct and meaningful predictor.
+
+- `PCT_WATER_INLAND`: Captures geographic vulnerability. Areas with high inland water percentages may be more exposed to flood-related outages or harder to restore.
+
+- `TOTAL.PRICE`: Reflects the economic cost of electricity in each region, possibly linked to infrastructure quality or consumer density.
+
+- `SEASON` (derived from `MONTH`): Encodes cyclical weather patterns. For example, outages in summer may be driven by heatwaves, while winter outages may involve storms or ice.
+
+- `POP_QUARTILE`: Allows the model to capture nonlinear effects in population size by binning into quartiles, which can generalize better than treating population as purely linear.
+
+These engineered features go beyond surface-level indicators and embed real-world structural factors that influence the severity and spread of power outages.
+
+**Model Trained**
+We developed and compared three final models:
+1. Final Model 1 - Linear Regression with SEASON and raw population features
+	- Basic improvement over the baseline by encoding cyclical time effects via SEASON.
+
+2. Final Model 2 – Linear Regression with DEMAND.LOSS.MW and MONTH
+
+	- Added grid- and time-sensitive features to improve precision.
+
+3. Final Model 3 (Best) – Random Forest with GridSearchCV tuning
+
+	- Used all engineered features and captured non-linear relationships and interactions between variables.
+
+**Model Selection and Hyperparameters**
+The final model uses a Random Forest Regressor within a Pipeline with one-hot encoding on categorical features (SEASON). I tuned hyperparameters using GridSearchCV with 5-fold cross-validation on the training set.
+
+**Best hyperparameters selected**:
+- n_estimators: 100
+- max_depth: 10
+- min_samples_split: 2
+This tuning process allowed the model to balance complexity and generalization, improving performance without overfitting.
+
+
+**Performance Comparision**
+
+| Model             | Train RMSE | Test RMSE |
+|-------------------|------------|-----------|
+| Baseline Model    | 0.0174     | 0.0170    |
+| Final Model 1     | 0.0173     | 0.0169    |
+| Final Model 2     | 0.0170     | 0.0165    |
+| Final Model 3     | **0.0127** | **0.0148** |
+
+The **Final Model 3** outperforms all others in terms of **test RMSE**, demonstrating that the additional engineered features and non-linear model structure help the model generalize better to unseen outages.
+
+
+The performance gains come not just from using a more complex model (Random Forest), but from incorporating domain-informed features like `DEMAND.LOSS.MW`, `PCT_WATER_INLAND`, seasonal effects, and customer density. These help the model reflect real-world infrastructure patterns and economic/geographic context more effectively than raw inputs alone.
+
+
+
+
+
+
 
 
 
