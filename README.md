@@ -144,3 +144,51 @@ We aim to predict the severity of a power outage, as measured by the percentage 
 * `MONTH`: Numeric month of the year — useful for capturing seasonal patterns in outages.
 
 To evaluate our regression model, we use **Root Mean Squared Error (RMSE)** as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
+
+
+
+## Baseline Model
+I built a linear regression model as a baseline to predict the **percentage of customers affected** (`PCT_CUSTOMERS_AFFECTED`) during a power outage. The goal of this step is to establish a simple, interpretable benchmark that can later be improved upon using more complex features and models.
+
+
+**Features Used**
+| Feature Name| Type|Description|
+|---------------------------|--------------|------------------------------------|
+| `SEVERE.WEATHER == True`  | Nominal | Binary indicator of whether the outage was caused by severe weather        |
+| `LOG_POPULATION`          | Quantitative| Log-transformed total population                                           |
+| `CUSTOMER_DENSITY`        | Quantitative| Ratio of total customers to population|
+| `SEASON`| Nominal| Season derived from `MONTH` (Winter, Spring, Summer, Fall)|
+
+- Quantitaive(2): `LOG_POPULATION`, `CUSTOMER_DENSITY`
+- Nominal(2): `SEVERE.WEATHER == True`, `SEASON`
+- Ordinal(0)
+	- Note: `MONTH` was converted to a nominal `SEASON` value
+
+
+**Target Variable**
+`PCT_CUSTOMERS_AFFECTED`: percentage of total customers impacted by the outage event
+
+**Preprocessing**
+- Missing Values: Filled in `POPULATION`, `MONTH`, `TOTAL.PRICE`, and `DEMAND.LOSS.MW` using their column means
+- Outlier Removal: Removed statistical outliers in `CUSTOMERS.AFFECTED` using the IQR method
+- Categorical Encoding: Applied **one-hot encoding** to `SEASON` via `ColumnTransformer`
+- Feature Engineering: 
+	- Derived `SEVERE.WEATHER == True` from the `CAUSE.CATEGORY`
+	- Created `CUSTOMER_DENSITY` using the `TOTAL.CUSTOMERS` and `POPULATION`
+	- Log-transformed `POPULATION` to reduce skew
+
+<iframe src="assets/final_cleaned_df_step_6.html" width="100%" height="400" frameborder="0"></iframe>
+
+
+**Model Training and Evaluation**
+- Model: LinearRegression from sklearn, inside a pipeline with preprocessing.
+- Train-Test Split: 80% training, 20% testing, using random_state=42.
+
+Overall, the baseline linear regression model performed well, achieving a **Train RMSE**: 0.017372044617043524 and a **Test RMSE**: 0.01698498642585826. The close values indivate that the model and the small feature set, this low RMSE suggests that the selected features are meaningful predictors of outage impact. This provides a strong foundation for future model improvements through more advanced techniques or feature engineering in next step.
+
+
+
+
+
+
+
