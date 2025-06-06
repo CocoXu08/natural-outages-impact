@@ -33,15 +33,18 @@ Each row in the dataset represents one **major outage event**. Relevant columns 
 We began by inspecting the structure and content of the dataset. Our first step was to drop the first row, which contained unit descriptions instead of actual data. We also removed the first column (variables), which simply held labels like “Units” called "obs".
 
 Next, we converted several columns into appropriate formats:
-* The OUTAGE.DURATION column, which originally contained unit suffixes and potentially invalid strings, was coerced into a numeric type using pd.to_numeric().
-* Dates such as OUTAGE.START.DATE were parsed into datetime objects.
-* We created a new column, PCT_CUSTOMERS_AFFECTED, by dividing CUSTOMERS.AFFECTED by TOTAL.CUSTOMERS.
+* The `OUTAGE.DURATION` column, which originally contained unit suffixes and potentially invalid strings, was coerced into a numeric type using pd.to_numeric().
+* Dates such as `OUTAGE.START.DATE` were parsed into datetime objects.
+* We created a new column, `PCT_CUSTOMERS_AFFECTED`, by dividing `CUSTOMERS.AFFECTED` by `TOTAL.CUSTOMERS`.
 
 To handle missing data, we removed rows with null or non-informative values in `PCT_CUSTOMERS_AFFECTED` and use IQR to remove extreme values, including:
-* CAUSE.CATEGORY
-* OUTAGE.DURATION
+* `CAUSE.CATEGORY`
+* `OUTAGE.DURATION`
 
-We then selected only the relevant columns for our analysis, including demographic, economic, and outage-specific variables. These included:
+To better understand the relationships between numerical features, we visualized the correlation matrixs to choose more closely related features:
+<iframe src="assets/correlation-matrix.html" width="900" height="700" frameborder="0"></iframe>
+
+We then selected only the relevant columns for our analysis, including demographic, economic, and outage-specific variables which have higher correlation based on the correlation matrixs we drawn above. These included:
 * YEAR, MONTH, U.S._STATE
 * CAUSE.CATEGORY, CUSTOMERS.AFFECTED, OUTAGE.DURATION
 * POPULATION, TOTAL.PRICE, TOTAL.CUSTOMERS
@@ -107,7 +110,7 @@ Distribution of `YEAR` by missingness of `DEMAND.LOSS.MW`:
 
 After running a permutation test with 1,000 simulations:
 * The observed variance in missingness across years was significantly larger than any variance seen in the permuted (randomized) datasets.
-* The p-value was 0.002, indicating that such a variance is extremely unlikely to occur by chance.
+* The p-value was **0.0**, indicating that such a variance is extremely unlikely to occur by chance.
 
 This result provides strong evidence that the missingness of `DEMAND.LOSS.MW` depends on `YEAR` and implies the missingness is MAR depending on `YEAR` column.
 
@@ -120,7 +123,7 @@ Distribution of `TOTAL.PRICE` by missingness of `DEMAND.LOSS.MW`:
 <iframe src="assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_TOTAL.PRICE.html" width="800" height="600" frameborder="0"></iframe>
 
 After running a similar permutation test:
-* The p-value was 0.108, meaning there is no statistically significant difference in missingness across different price levels under our chosen significant level(0.05).
+* The p-value was **0.108**, meaning there is no statistically significant difference in missingness across different price levels under our chosen significant level(0.05).
 
 There is not enough evidence to conclude that the missingness of `DEMAND.LOSS.MW` depends on `TOTAL.PRICE`. This suggests that electricity pricing likely does not influence whether demand loss is reported, and thus `TOTAL.PRICE` may be independent of this missingness.
 
@@ -158,7 +161,7 @@ We aim to predict the severity of a power outage, as measured by the percentage 
 * `POPULATION`: Total population in the affected area.
 * `MONTH`: Numeric month of the year — useful for capturing seasonal patterns in outages.
 
-To make sure our model is realistic, we’re only using features that would be known right when the outage starts. These include things like the cause of the outage (CAUSE.CATEGORY, CAUSE.CATEGORY.DETAIL), the state it happened in (U.S._STATE), the climate region, percentage of inland water, anomaly level, population, and total number of customers. We’re leaving out columns `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`, because those values only make sense after the outage has already happened. This way, our model is actually useful for making predictions in real-time, not just analyzing what already happened.
+To make sure our model is realistic, we’re only using features that would be known right when the outage starts. These include things like the cause of the outage (`CAUSE.CATEGORY`, `CAUSE.CATEGORY.DETAIL`), the state it happened in (`U.S._STATE`), the climate region, percentage of inland water, anomaly level, population, and total number of customers. We’re leaving out columns `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`, because those values only make sense after the outage has already happened. This way, our model is actually useful for making predictions in real-time, not just analyzing what already happened.
 
 To evaluate our regression model, we use **Root Mean Squared Error (RMSE)** as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
 
