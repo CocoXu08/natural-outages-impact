@@ -172,14 +172,14 @@ We built a linear regression model as a baseline to predict the **percentage of 
 
 | Feature Name              | Type         | Description                                                               |
 |---------------------------|--------------|----------------------------------------------------------------------------|
-| SEVERE.WEATHER == True    | Nominal      | Binary indicator of whether the outage was caused by severe weather       |
-| LOG_POPULATION            | Quantitative | Log-transformed total population                                          |
-| CUSTOMER_DENSITY          | Quantitative | Ratio of total customers to population                                    |
-| SEASON                    | Nominal      | Season derived from MONTH (Winter, Spring, Summer, Fall)                  |
+| `SEVERE.WEATHER == True`    | Nominal      | Binary indicator of whether the outage was caused by severe weather       |
+| `LOG_POPULATION`            | Quantitative | Log-transformed total population                                          |
+| `TOTAL.PRICE`          | Quantitative | Electricity price during the outage (proxy for economic impact)                                    |
+| `SEASON`                    | Nominal      | Season derived from MONTH (Winter, Spring, Summer, Fall)                  |
 
 
 
-- Quantitaive(2): `LOG_POPULATION`, `CUSTOMER_DENSITY`
+- Quantitaive(2): `LOG_POPULATION`, `TOTAL.PRICE`
 - Nominal(2): `SEVERE.WEATHER == True`, `SEASON`
 - Ordinal(0)
 	- Note: `MONTH` was converted to a nominal `SEASON` value
@@ -206,8 +206,8 @@ We built a linear regression model as a baseline to predict the **percentage of 
 - Train-Test Split: 80% training, 20% testing, using random_state=42.
 
 Overall, the baseline linear regression model performed well, achieving 
-- **Train RMSE**: 0.017372044617043524 
-- **Test RMSE**: 0.01698498642585826
+- **Train RMSE**: 0.017369169379285124
+- **Test RMSE**: 0.017171398578865387
 
 The close values indivate that the model and the small feature set, this low RMSE suggests that the selected features are meaningful predictors of outage impact. This provides a strong foundation for future model improvements through more advanced techniques or feature engineering in next step.
 
@@ -227,20 +227,28 @@ To improve the baseline model performance, we introduced several new features th
 These engineered features go beyond surface-level indicators and embed real-world structural factors that influence the severity and spread of power outages.
 
 **Model Trained**
-We developed and compared three final models:
+We developed and compared three final models to predict the percentage of customers affected during a power outage:
 1. Final Model 1 - Linear Regression with SEASON and raw population features
-	- Basic improvement over the baseline by encoding cyclical time effects via SEASON.
+	- This model incorporated seasonal patterns through the `SEASON` feature (derived from `MONTH`) and the size of the service region via `POPULATION`.
+	- `SEASON` helps account for cyclical environmental effects like winter storms or summer heatwaves, which often drive outages.
+	- `POPULATION` serves as a proxy for regional scale — larger areas may experience more widespread outages or different recovery logistics.
 
-2. Final Model 2 – Linear Regression with DEMAND.LOSS.MW and MONTH
+2. Final Model 2 – Linear Regression with `MONTH`, `POPULATION`, and `TOTAL.PRICE`
+	- This model used the raw `MONTH` feature instead of `SEASON`, providing more granular time information.
+	- `TOTAL.PRICE` likely reflects infrastructure cost and energy market dynamics, which could correlate with regional reliability or demand.
+	- Compared to Model 1, this model emphasized economic and temporal precision.
 
-	- Added grid- and time-sensitive features to improve precision.
 
-3. Final Model 3 (Best) – Random Forest with GridSearchCV tuning
 
-	- Used all engineered features and captured non-linear relationships and interactions between variables.
+3. FFinal Model 3 (Best) – Random Forest with GridSearchCV
+	- This model included `SEASON`, `POPULATION`, `PCT_WATER_INLAND`, and `SEVERE.WEATHER == True`.
+	- `PCT_WATER_INLAND` captures geographic vulnerability — regions with more water may face flood-prone outages.
+	- The non-linear structure of **Random Forest** allows it to model complex interactions (e.g., population × season × weather).
+	- This model used one-hot encoding for `SEASON` and captured heterogeneous effects across groups without requiring assumptions of linearity.
 
 **Model Selection and Hyperparameters**
-The final model uses a Random Forest Regressor within a Pipeline with one-hot encoding on categorical features (SEASON). I tuned hyperparameters using GridSearchCV with 5-fold cross-validation on the training set.
+- Model: Random Forest Regressor
+- Pipeline: One-hot encoding for `SEASON` via `ColumnTransformer`
 
 **Best hyperparameters selected**:
 - n_estimators: 100
@@ -253,15 +261,14 @@ This tuning process allowed the model to balance complexity and generalization, 
 
 | Model             | Train RMSE | Test RMSE |
 |-------------------|------------|-----------|
-| Baseline Model    | 0.0174     | 0.0170    |
+| Baseline Model    | 0.0174     | 0.0172    |
 | Final Model 1     | 0.0173     | 0.0169    |
-| Final Model 2     | 0.0170     | 0.0165    |
-| Final Model 3     | **0.0127** | **0.0148** |
+| Final Model 2     | 0.0172     | 0.0170    |
+| Final Model 3     | **0.0145** | **0.0166** |
 
-The **Final Model 3** outperforms all others in terms of **test RMSE**, demonstrating that the additional engineered features and non-linear model structure help the model generalize better to unseen outages.
+The **Final Model 3** outperforms all others in terms of **test RMSE**, confirming its ability to generalize better due to its non-linear structure and enhanced feature set.
 
-
-The performance gains come not just from using a more complex model (Random Forest), but from incorporating domain-informed features like `DEMAND.LOSS.MW`, `PCT_WATER_INLAND`, seasonal effects, and customer density. These help the model reflect real-world infrastructure patterns and economic/geographic context more effectively than raw inputs alone.
+The performance improvement in Final Model 3 was not solely due to the use of a more flexible model but also the inclusion of domain-relevant features that reflect real-world outage conditions — such as weather, seasonal patterns, geographic risk, and population size. These features better capture the data-generating process behind power outage impacts, leading to more accurate and reliable predictions.
 
 
 
