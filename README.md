@@ -158,6 +158,8 @@ We aim to predict the severity of a power outage, as measured by the percentage 
 * `POPULATION`: Total population in the affected area.
 * `MONTH`: Numeric month of the year — useful for capturing seasonal patterns in outages.
 
+To make sure our model is realistic, we’re only using features that would be known right when the outage starts. These include things like the cause of the outage (CAUSE.CATEGORY, CAUSE.CATEGORY.DETAIL), the state it happened in (U.S._STATE), the climate region, percentage of inland water, anomaly level, population, and total number of customers. We’re leaving out columns `OUTAGE.DURATION`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`, because those values only make sense after the outage has already happened. This way, our model is actually useful for making predictions in real-time, not just analyzing what already happened.
+
 To evaluate our regression model, we use **Root Mean Squared Error (RMSE)** as our evaluation metric. RMSE is appropriate because our target is continuous, and we care more about penalizing larger errors (e.g., underestimating a major outage). We chose RMSE over alternatives like MAE because it puts more weight on large deviations and RMSE retains the same units as the target making it easier to interpret, while metrics like accuracy and F1-score do not apply to regression tasks.
 
 
