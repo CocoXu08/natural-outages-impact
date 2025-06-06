@@ -4,13 +4,13 @@ A data science project for DSC 80 at UC San Diego exploring how the cause of pow
 
 > **What characteristics are associated with more severe power outages in the United States?**
 
-This project explores the factors that influence the severity of major power outages in the United States where severity is measured by number of customers affected, using a rich dataset that includes event-level outage records, demographic and economic statistics, and environmental context. Specifically, we highlight on how factors such as geographic location, time of year, climate conditions, and other regional economic indicators influence the severity of power outages and aim for figuring out how these factors could help energy companies predict the location and impact of future major outages.
+This project explores the factors that influence the severity of major power outages in the United States where severity is measured by percentage of customers affected, using a rich dataset that includes event-level outage records, demographic and economic statistics, and environmental context. Specifically, we highlight on how factors such as geographic location, time of year, climate conditions, and other regional economic indicators influence the severity of power outages and aim for figuring out how these factors could help energy companies predict the location and impact of future major outages.
 
 Power outages have wide-reaching impacts on society — disrupting transportation, healthcare, communication, and safety. Understanding the underlying patterns in when and where outages happen, and how bad they get, can help utilities and governments mitigate future risks.
 
 ---
 
-Our dataset contains approximately **1,500 outage events** from across the United States, covering multiple years and geographic regions.
+Our dataset contains **1,534 outage events** from across the United States, covering multiple years and geographic regions.
 
 Each row in the dataset represents one **major outage event**. Relevant columns include:
 
@@ -30,10 +30,24 @@ Each row in the dataset represents one **major outage event**. Relevant columns 
 
 ## Data Cleaning and Exploratory Data Analysis
 ### 1. **Data Cleaning**
-We began by identifying and standardizing column types (e.g. converting `OUTAGE.DURATION` to numeric). We dropped unit suffixes`OBS`, parsed dates, and created boolean indicators for missingness.
+We began by inspecting the structure and content of the dataset. Our first step was to drop the first row, which contained unit descriptions instead of actual data. We also removed the first column (variables), which simply held labels like “Units” called "obs".
 
-We also filtered out rows with null or uninformative values in key columns such as `CAUSE.CATEGORY`, `PCT_CUSTOMERS_AFFECTED`, and `OUTAGE.DURATION`.
+Next, we converted several columns into appropriate formats:
+* The OUTAGE.DURATION column, which originally contained unit suffixes and potentially invalid strings, was coerced into a numeric type using pd.to_numeric().
+* Dates such as OUTAGE.START.DATE were parsed into datetime objects.
+* We created a new column, PCT_CUSTOMERS_AFFECTED, by dividing CUSTOMERS.AFFECTED by TOTAL.CUSTOMERS.
 
+To handle missing data, we removed rows with null or non-informative values in `PCT_CUSTOMERS_AFFECTED` and use IQR to remove extreme values, including:
+* CAUSE.CATEGORY
+* OUTAGE.DURATION
+
+We then selected only the relevant columns for our analysis, including demographic, economic, and outage-specific variables. These included:
+* YEAR, MONTH, U.S._STATE
+* CAUSE.CATEGORY, CUSTOMERS.AFFECTED, OUTAGE.DURATION
+* POPULATION, TOTAL.PRICE, TOTAL.CUSTOMERS
+* CLIMATE.REGION, PCT_CUSTOMERS_AFFECTED, PCT_WATER_INLAND, and ANOMALY.LEVEL
+
+This cleaning process reduced our dataset to 1,534 rows × 57 columns initially, and later to a more manageable shape 1091 rows × 15 columns after column selection and missing data filtering.
 Here is a preview of our cleaned dataset:
 <iframe src="assets/df_preview.html" width="100%" height="250"></iframe>
 
@@ -81,8 +95,8 @@ To potentially reclassify this missingness as Missing At Random (MAR), there are
 ---
 ### Missingness Dependency Analysis of `DEMAND.LOSS.MW`
 We investigated whether the missingness of the `DEMAND.LOSS.MW` column depends on other columns using permutation testing. Specifically, we tested on:
-	•	Whether the missingness varies by `YEAR` (i.e., does the chance that DEMAND.LOSS.MW is missing differ between years?)
-	•	Whether it depends on `TOTAL.PRICE`
+* Whether the missingness varies by `YEAR` (i.e., does the chance that DEMAND.LOSS.MW is missing differ between years?)
+* Whether it depends on `TOTAL.PRICE`
 #### Test 1: Is Missingness of `DEMAND.LOSS.MW` Dependent on `YEAR`?
 We assess the MAR by creating a binary indicator `DEMAND_LOSS_IS_MISSING` and computed the variance in missingness rate across years as statistics. Then, we shuffled the missingness labels and repeated this 1,000 times to build a null distribution of variance under the assumption of no relationship.
 
@@ -95,7 +109,7 @@ After running a permutation test with 1,000 simulations:
 * The observed variance in missingness across years was significantly larger than any variance seen in the permuted (randomized) datasets.
 * The p-value was 0.002, indicating that such a variance is extremely unlikely to occur by chance.
 
-This result provides strong evidence that the missingness of `DEMAND.LOSS.MW` depends on `YEAR` and implies the missingness is not Missing Completely At Random (MCAR).
+This result provides strong evidence that the missingness of `DEMAND.LOSS.MW` depends on `YEAR` and implies the missingness is MAR depending on `YEAR` column.
 
 #### Test 2: Is Missingness of `DEMAND.LOSS.MW` Dependent on `TOTAL.PRICE`?
 
@@ -114,12 +128,12 @@ There is not enough evidence to conclude that the missingness of `DEMAND.LOSS.MW
 
 We conducted a hypothesis test to determine whether **severe weather events** result in a significantly higher number of customers affected compared to **non-severe events**. We chose to compare severe vs. non-severe weather events because weather-related causes are one of the most frequent and impactful types of outages in the dataset.
 
-* **Null hypothesis**: The average number of customers affected by power outages is the same for outages caused by natural events(e.g., heavy winds, storms, earthquakes) and those caused by other factors such as equipment failure, fuel supply emergencies, or vandalism.
+* **Null hypothesis**: The average number of customers affected by power outages is the same for outages caused by **severe weather events**(e.g., heavy winds, storms, earthquakes) and those caused by other factors such as equipment failure, fuel supply emergencies, or vandalism.
 
-* **Alternative hypothesis**: The average number of customers affected is higher for outages caused by natural events (e.g., heavy winds, storms, earthquakes) than for those caused by other reasons.
+* **Alternative hypothesis**: The average number of customers affected is higher for outages caused by **severe weather events** (e.g., heavy winds, storms, earthquakes) than for those caused by other reasons.
 
 * **Method**: A permutation test with 5000 repetitions was used. Labels indicating severe vs. non-severe events were randomly shuffled to generate a null distribution of mean differences.
-* Test Statistic: The difference in mean number of customers affected.
+* **Test Statistic**: The mean number of customers affected by outages due to severe weather events minus the mean number of customers affected by outages due to non-severe weather causes.
 
 <iframe src="assets/null_dist_severe_weather.html" width="800" height="500" frameborder="0"></iframe>
 * Observed Statistic: 108,544.95 customers
@@ -127,6 +141,7 @@ We conducted a hypothesis test to determine whether **severe weather events** re
 
 
 * **Result**: The p-value for our permutation testing is 0.0. Thus, we reject the null hypothesis at the significance level 0.05. This provides strong statistical evidence that natural events tend to result in more widespread outages since the average number of customers affected is higher by natural events than by other risk factors. However, this result is based on statistical inference, not a controlled experiment, so we cannot claim causation.
+
 
 ## Framing a Prediction Problem
 
