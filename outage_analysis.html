@@ -8345,10 +8345,11 @@ Requirement already satisfied: et-xmlfile in /Users/zilingxu/miniforge3/envs/dsc
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_no_unit</span><span class="p">[</span><span class="s2">"PCT_CUSTOMERS_AFFECTED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_no_unit</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span><span class="o">/</span><span class="n">df_no_unit</span><span class="p">[</span><span class="s2">"TOTAL.CUSTOMERS"</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_no_unit</span><span class="p">[</span><span class="s2">"PCT_CUSTOMERS_AFFECTED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_no_unit</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span><span class="o">/</span>\
+    <span class="n">df_no_unit</span><span class="p">[</span><span class="s2">"TOTAL.CUSTOMERS"</span><span class="p">]</span>
 <span class="n">df_no_unit</span>
 </pre></div>
 </div>
@@ -8360,7 +8361,7 @@ Requirement already satisfied: et-xmlfile in /Users/zilingxu/miniforge3/envs/dsc
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8776,13 +8777,14 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="s2">"DEMAND.LOSS.MW"</span><span class="p">,</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> <span class="s2">"RES.PRICE"</span><span class="p">,</span> <span class="s2">"COM.PRICE"</span><span class="p">,</span> <span class="s2">"IND.PRICE"</span><span class="p">,</span> <span class="s2">"TOTAL.PRICE"</span><span class="p">,</span>
+<span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="s2">"DEMAND.LOSS.MW"</span><span class="p">,</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> <span class="s2">"RES.PRICE"</span><span class="p">,</span> \
+       <span class="s2">"COM.PRICE"</span><span class="p">,</span> <span class="s2">"IND.PRICE"</span><span class="p">,</span> <span class="s2">"TOTAL.PRICE"</span><span class="p">,</span>
        <span class="s2">"RES.SALES"</span><span class="p">,</span> <span class="s2">"COM.SALES"</span><span class="p">,</span> <span class="s2">"IND.SALES"</span><span class="p">,</span> <span class="s2">"TOTAL.SALES"</span><span class="p">,</span> <span class="s2">"PCT_CUSTOMERS_AFFECTED"</span><span class="p">]</span>
 <span class="n">corr</span> <span class="o">=</span> <span class="n">df_no_unit</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 
@@ -8903,13 +8905,15 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Select relevant columns</span>
-<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df_no_unit</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s1">'YEAR'</span><span class="p">,</span> <span class="s1">'MONTH'</span><span class="p">,</span><span class="s1">'U.S._STATE'</span><span class="p">,</span> <span class="s1">'CAUSE.CATEGORY'</span><span class="p">,</span> <span class="s1">'CAUSE.CATEGORY.DETAIL'</span><span class="p">,</span>
-                             <span class="s1">'CUSTOMERS.AFFECTED'</span><span class="p">,</span> <span class="s1">'OUTAGE.DURATION'</span><span class="p">,</span> <span class="s1">'DEMAND.LOSS.MW'</span><span class="p">,</span><span class="s1">'POPULATION'</span><span class="p">,</span>
-                             <span class="s1">'TOTAL.PRICE'</span><span class="p">,</span><span class="s1">'TOTAL.CUSTOMERS'</span><span class="p">,</span> <span class="s2">"CLIMATE.REGION"</span><span class="p">,</span> <span class="s2">"PCT_CUSTOMERS_AFFECTED"</span><span class="p">,</span> <span class="s1">'PCT_WATER_INLAND'</span><span class="p">,</span><span class="s1">'ANOMALY.LEVEL'</span><span class="p">])</span>
+<span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df_no_unit</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="s1">'YEAR'</span><span class="p">,</span> <span class="s1">'MONTH'</span><span class="p">,</span><span class="s1">'U.S._STATE'</span><span class="p">,</span> <span class="s1">'CAUSE.CATEGORY'</span><span class="p">,</span> 
+                             <span class="s1">'CAUSE.CATEGORY.DETAIL'</span><span class="p">,</span><span class="s1">'CUSTOMERS.AFFECTED'</span><span class="p">,</span> <span class="s1">'OUTAGE.DURATION'</span><span class="p">,</span> 
+                                <span class="s1">'DEMAND.LOSS.MW'</span><span class="p">,</span><span class="s1">'POPULATION'</span><span class="p">,</span><span class="s1">'TOTAL.PRICE'</span><span class="p">,</span><span class="s1">'TOTAL.CUSTOMERS'</span><span class="p">,</span> 
+                                    <span class="s2">"CLIMATE.REGION"</span><span class="p">,</span> <span class="s2">"PCT_CUSTOMERS_AFFECTED"</span><span class="p">,</span> 
+                                        <span class="s1">'PCT_WATER_INLAND'</span><span class="p">,</span><span class="s1">'ANOMALY.LEVEL'</span><span class="p">])</span>
 <span class="n">df_cleaned</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -8921,7 +8925,7 @@ dtype: object</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>YEAR                        0
 MONTH                       9
@@ -8948,11 +8952,12 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Converting "OUTAGE.DURATION" to numeric</span>
-<span class="n">df_cleaned</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"OUTAGE.DURATION"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_cleaned</span><span class="p">[</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
+<span class="n">df_cleaned</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"OUTAGE.DURATION"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_cleaned</span><span class="p">[</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">],</span> 
+                                                     <span class="n">errors</span><span class="o">=</span><span class="s1">'coerce'</span><span class="p">)</span>
 
 <span class="c1"># Drops rows with missing values in 'CUSTOMERS.AFFECTED'</span>
 <span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df_cleaned</span><span class="p">[</span><span class="n">df_cleaned</span><span class="p">[</span><span class="s1">'CUSTOMERS.AFFECTED'</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -8970,7 +8975,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9219,11 +9224,12 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Visualize the distribution of causes of power outages ("CAUSE.CATEGORY")</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Histogram of Cause of Power Outage'</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> 
+                   <span class="n">title</span><span class="o">=</span><span class="s1">'Histogram of Cause of Power Outage'</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Histogram_of_Cause_of_Power_Outage.html"</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
@@ -9245,11 +9251,12 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Visualize the distribution of power outages across different climate categories (CLIMATE.CATEGORY)</span>
-<span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'CLIMATE.CATEGORY'</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Histogram of Climate of Power Outage'</span><span class="p">)</span>
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'CLIMATE.CATEGORY'</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> 
+                    <span class="n">title</span><span class="o">=</span><span class="s1">'Histogram of Climate of Power Outage'</span><span class="p">)</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">fig2</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Histogram_of_CLIMATE.CATEGORY.html"</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
@@ -9574,11 +9581,12 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Full plot</span>
-<span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Scatter Plot of Number of Customers Affected vs Outage Duration'</span><span class="p">)</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> 
+                  <span class="n">title</span><span class="o">=</span><span class="s1">'Scatter Plot of Number of Customers Affected vs Outage Duration'</span><span class="p">)</span>
 <span class="n">fig3</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50000</span><span class="p">]),</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
@@ -9602,11 +9610,12 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Scatter Plot of Outage duration vs Demand Loss (Zoomed in)</span>
-<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"DEMAND.LOSS.MW"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Scatter Plot of Number of Customers Affected vs Outage Duration'</span><span class="p">)</span>
+<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"DEMAND.LOSS.MW"</span><span class="p">,</span> 
+                  <span class="n">title</span><span class="o">=</span><span class="s1">'Scatter Plot of Number of Customers Affected vs Outage Duration'</span><span class="p">)</span>
 <span class="n">fig4</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]),</span>
     <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">]),</span>
@@ -9631,17 +9640,19 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Scatter Plot of Number of Customers Affected vs Outage Duration (Zoomed in)</span>
-<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Scatter Plot of Number of Customers Affected vs Outage Duration'</span><span class="p">)</span>
+<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_no_unit</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"OUTAGE.DURATION"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> 
+                  <span class="n">title</span><span class="o">=</span><span class="s1">'Scatter Plot of Number of Customers Affected vs Outage Duration'</span><span class="p">)</span>
 <span class="n">fig4</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]),</span>
     <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">]),</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 <span class="n">fig4</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">fig4</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Scatter_OUTAGE_DURATION_vs_CUSTOMERS_AFFECTED.html"</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
+<span class="n">fig4</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Scatter_OUTAGE_DURATION_vs_CUSTOMERS_AFFECTED.html"</span><span class="p">,</span> 
+                <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -10004,7 +10015,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># MAR example</span>
@@ -10019,7 +10030,8 @@ dtype: int64</pre>
 
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">shuffled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">df_check_missing</span><span class="p">[</span><span class="s2">"DEMAND_LOSS_IS_MISSING"</span><span class="p">])</span>
-    <span class="n">shuffled_stat</span> <span class="o">=</span> <span class="n">df_check_missing</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">shuffled_missing</span><span class="o">=</span><span class="n">shuffled</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"YEAR"</span><span class="p">)[</span><span class="s2">"shuffled_missing"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">shuffled_stat</span> <span class="o">=</span> <span class="n">df_check_missing</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">shuffled_missing</span><span class="o">=</span><span class="n">shuffled</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"YEAR"</span><span class="p">)[</span><span class="s2">"shuffled_missing"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
     <span class="n">stats_customers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shuffled_stat</span><span class="p">)</span>
 
 <span class="c1"># Calculate p-value</span>
@@ -10048,7 +10060,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Plot permutation distribution with observed variance marked</span>
@@ -10065,7 +10077,8 @@ dtype: int64</pre>
     <span class="n">annotation_position</span><span class="o">=</span><span class="s2">"top right"</span>
 <span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_YEAR.html"</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_YEAR.html"</span><span class="p">,</span> 
+               <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -10132,7 +10145,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -10143,7 +10156,8 @@ dtype: int64</pre>
 <span class="n">stats</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">shuffled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">df_check_missing</span><span class="p">[</span><span class="s2">"DEMAND_LOSS_IS_MISSING"</span><span class="p">])</span>
-    <span class="n">shuffled_stat</span> <span class="o">=</span> <span class="n">df_check_missing</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">shuffled_missing</span><span class="o">=</span><span class="n">shuffled</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"TOTAL.PRICE"</span><span class="p">)[</span><span class="s2">"shuffled_missing"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">shuffled_stat</span> <span class="o">=</span> <span class="n">df_check_missing</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">shuffled_missing</span><span class="o">=</span><span class="n">shuffled</span><span class="p">)</span>\
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"TOTAL.PRICE"</span><span class="p">)[</span><span class="s2">"shuffled_missing"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
     <span class="n">stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shuffled_stat</span><span class="p">)</span>
 
 <span class="c1"># Calculate p-value</span>
@@ -10172,16 +10186,18 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Plot the permutation results with the observed</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="p">,</span><span class="n">nbins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">"Permutation Test: Variance in DEMAND.LOSS.MW Missingness by TOTAL.PRICE"</span><span class="p">,</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">stats</span><span class="p">,</span><span class="n">nbins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">"Permutation Test: Variance in "</span> \
+<span class="s2">"DEMAND.LOSS.MW Missingness by TOTAL.PRICE"</span><span class="p">,</span>
     <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="s1">'Test Statistic (Variance)'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="s1">'Count'</span><span class="p">}</span>
 <span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">observed_var</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">"Observed"</span><span class="p">,</span> <span class="n">annotation_position</span><span class="o">=</span><span class="s2">"top right"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_TOTAL.PRICE.html"</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_TOTAL.PRICE.html"</span><span class="p">,</span> 
+               <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -10498,12 +10514,14 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Create binary columns that indicate whether the outage was caused by severe weather or not</span>
-<span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s2">"SEVERE.WEATHER == True"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"severe weather"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s2">"SEVERE.WEATHER == False"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"severe weather"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s2">"SEVERE.WEATHER == True"</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="p">(</span><span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"severe weather"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s2">"SEVERE.WEATHER == False"</span><span class="p">]</span> <span class="o">=</span> \
+    <span class="p">(</span><span class="n">df_cleaned_mfilled</span><span class="p">[</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"severe weather"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -10851,11 +10869,12 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Box Plot of Cleaned Customers Affected Distribution</span>
-<span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_new_2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'PCT_CUSTOMERS_AFFECTED'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Percentage of Customers Affected Distribution'</span><span class="p">)</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_new_2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'PCT_CUSTOMERS_AFFECTED'</span><span class="p">,</span> 
+              <span class="n">title</span><span class="o">=</span><span class="s1">'Percentage of Customers Affected Distribution'</span><span class="p">)</span>
 <span class="n">fig3</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">yaxis_title</span><span class="o">=</span><span class="s1">'Percentage of Customer Affected'</span><span class="p">)</span>
 <span class="n">fig3</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -11203,7 +11222,7 @@ Test RMSE: 0.017171398578865387
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Feature Engineering</span>
@@ -11211,11 +11230,13 @@ Test RMSE: 0.017171398578865387
 
 <span class="n">X_final_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">X_final_train</span><span class="p">[</span><span class="s2">"LOG_CUSTOMER_AFFECTED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">X_final_train</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">])</span>
-<span class="n">X_final_train</span><span class="p">[</span><span class="s2">"POP_QUARTILE"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">X_final_train</span><span class="p">[</span><span class="s2">"POPULATION"</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Q1"</span><span class="p">,</span> <span class="s2">"Q2"</span><span class="p">,</span> <span class="s2">"Q3"</span><span class="p">,</span> <span class="s2">"Q4"</span><span class="p">])</span>
+<span class="n">X_final_train</span><span class="p">[</span><span class="s2">"POP_QUARTILE"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">X_final_train</span><span class="p">[</span><span class="s2">"POPULATION"</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                                        <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Q1"</span><span class="p">,</span> <span class="s2">"Q2"</span><span class="p">,</span> <span class="s2">"Q3"</span><span class="p">,</span> <span class="s2">"Q4"</span><span class="p">])</span>
 
 <span class="n">X_final_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">X_final_test</span><span class="p">[</span><span class="s2">"LOG_CUSTOMER_AFFECTED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">X_final_test</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">])</span>
-<span class="n">X_final_test</span><span class="p">[</span><span class="s2">"POP_QUARTILE"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">X_final_test</span><span class="p">[</span><span class="s2">"POPULATION"</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Q1"</span><span class="p">,</span> <span class="s2">"Q2"</span><span class="p">,</span> <span class="s2">"Q3"</span><span class="p">,</span> <span class="s2">"Q4"</span><span class="p">])</span>
+<span class="n">X_final_test</span><span class="p">[</span><span class="s2">"POP_QUARTILE"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">X_final_test</span><span class="p">[</span><span class="s2">"POPULATION"</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                                       <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"Q1"</span><span class="p">,</span> <span class="s2">"Q2"</span><span class="p">,</span> <span class="s2">"Q3"</span><span class="p">,</span> <span class="s2">"Q4"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -11330,14 +11351,16 @@ Test RMSE: 0.016956939801962126
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Use SEASON + POP_QUARTILE as categorical; CUSTOMER_DENSITY as numeric</span>
 
-<span class="n">X_final_train3</span> <span class="o">=</span> <span class="n">X_final_train</span><span class="p">[[</span><span class="s2">"SEVERE.WEATHER == True"</span><span class="p">,</span> <span class="s2">"POPULATION"</span><span class="p">,</span> <span class="s2">"SEASON"</span><span class="p">,</span><span class="s1">'PCT_WATER_INLAND'</span><span class="p">]]</span>
+<span class="n">X_final_train3</span> <span class="o">=</span> <span class="n">X_final_train</span><span class="p">[[</span><span class="s2">"SEVERE.WEATHER == True"</span><span class="p">,</span> <span class="s2">"POPULATION"</span><span class="p">,</span> 
+                                <span class="s2">"SEASON"</span><span class="p">,</span><span class="s1">'PCT_WATER_INLAND'</span><span class="p">]]</span>
 
-<span class="n">X_final_test3</span> <span class="o">=</span> <span class="n">X_final_test</span><span class="p">[[</span><span class="s2">"SEVERE.WEATHER == True"</span><span class="p">,</span> <span class="s2">"POPULATION"</span><span class="p">,</span> <span class="s2">"SEASON"</span><span class="p">,</span><span class="s1">'PCT_WATER_INLAND'</span><span class="p">]]</span>
+<span class="n">X_final_test3</span> <span class="o">=</span> <span class="n">X_final_test</span><span class="p">[[</span><span class="s2">"SEVERE.WEATHER == True"</span><span class="p">,</span> <span class="s2">"POPULATION"</span><span class="p">,</span> 
+                              <span class="s2">"SEASON"</span><span class="p">,</span><span class="s1">'PCT_WATER_INLAND'</span><span class="p">]]</span>
 
 
 <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
@@ -12047,7 +12070,7 @@ Random Forest RMSE on test set: 0.01657650108526563
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># function for absolute difference in RMSE</span>
@@ -12056,7 +12079,8 @@ Random Forest RMSE on test set: 0.01657650108526563
     <span class="n">data</span><span class="p">[</span><span class="s1">'anomaly_group'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'ANOMALY.LEVEL'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="c1"># Get predictions for each row using our final model from the previous section</span>
-    <span class="n">data</span><span class="p">[</span><span class="s1">'prediction'</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'PCT_CUSTOMERS_AFFECTED'</span><span class="p">,</span> <span class="s1">'anomaly_group'</span><span class="p">]))</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">'prediction'</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span>\
+                                                      <span class="p">[</span><span class="s1">'PCT_CUSTOMERS_AFFECTED'</span><span class="p">,</span> <span class="s1">'anomaly_group'</span><span class="p">]))</span>
 
     <span class="c1"># Calculate the original sample's absolute difference in RMSE </span>
     <span class="n">group_0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">'anomaly_group'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
@@ -12084,8 +12108,10 @@ Random Forest RMSE on test set: 0.01657650108526563
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Permutation test p-value: </span><span class="si">{</span><span class="n">p_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
-<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">rmse_diffs</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Permutation Test: RMSE Difference by Anomaly Level"</span><span class="p">)</span>
-<span class="n">fig4</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">observed_diff</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">"dash"</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">"Observed Diff"</span><span class="p">)</span>
+<span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">rmse_diffs</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Permutation Test"</span> \
+<span class="s2">": RMSE Difference by Anomaly Level"</span><span class="p">)</span>
+<span class="n">fig4</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">observed_diff</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">"dash"</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> 
+               <span class="n">annotation_text</span><span class="o">=</span><span class="s2">"Observed Diff"</span><span class="p">)</span>
 <span class="n">fig4</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"RMSE Difference"</span><span class="p">,</span>
     <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">"Frequency"</span><span class="p">,</span>
