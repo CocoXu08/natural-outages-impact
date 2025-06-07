@@ -231,12 +231,12 @@ These engineered features go beyond surface-level indicators and embed real-worl
 
 **Model Trained**
 We developed and compared three final models to predict the percentage of customers affected during a power outage:
-1. Final Model 1 - Linear Regression with SEASON and raw population features
+1. Final Model 1 - Linear Regression with `SEVERE.WEATHER == True`, `SEASON` and raw population features
 	- This model incorporated seasonal patterns through the `SEASON` feature (derived from `MONTH`) and the size of the service region via `POPULATION`.
 	- `SEASON` helps account for cyclical environmental effects like winter storms or summer heatwaves, which often drive outages.
 	- `POPULATION` serves as a proxy for regional scale — larger areas may experience more widespread outages or different recovery logistics.
 
-2. Final Model 2 – Linear Regression with `MONTH`, `POPULATION`, and `TOTAL.PRICE`
+2. Final Model 2 – Linear Regression with `SEVERE.WEATHER == True`, `MONTH`, `POPULATION`, and `TOTAL.PRICE`
 	- This model used the raw `MONTH` feature instead of `SEASON`, providing more granular time information.
 	- `TOTAL.PRICE` likely reflects infrastructure cost and energy market dynamics, which could correlate with regional reliability or demand.
 	- Compared to Model 1, this model emphasized economic and temporal precision.
