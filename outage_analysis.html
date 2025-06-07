@@ -10194,9 +10194,11 @@ dtype: int64</pre>
 <span class="s2">"DEMAND.LOSS.MW Missingness by TOTAL.PRICE"</span><span class="p">,</span>
     <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="s1">'Test Statistic (Variance)'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">:</span> <span class="s1">'Count'</span><span class="p">}</span>
 <span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">observed_var</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">"Observed"</span><span class="p">,</span> <span class="n">annotation_position</span><span class="o">=</span><span class="s2">"top right"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">observed_var</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">annotation_text</span><span class="o">=</span><span class="s2">"Observed"</span><span class="p">,</span> 
+              <span class="n">annotation_position</span><span class="o">=</span><span class="s2">"top right"</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_by_TOTAL.PRICE.html"</span><span class="p">,</span> 
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"assets/Permutation_Test_Variance_in_DEMAND.LOSS.MW_Missingness_"</span> \
+<span class="s2">"by_TOTAL.PRICE.html"</span><span class="p">,</span> 
                <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s1">'cdn'</span><span class="p">)</span>
 </pre></div>
 </div>
